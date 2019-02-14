@@ -1,7 +1,11 @@
 hmrc-create-user
 ================
 
-Application to create test users. Needs the following environment variables in .env:
+Application to create test users. The HMRC web page designed to create test users does not produce accounts usable for VAT apparently.
+
+This is a nodejs adaption of HMRC example code that can be used to create users.
+
+Needs the following environment variables in .env:
 
 ```
 HMRC_SERVER_TOKEN=your_server_token

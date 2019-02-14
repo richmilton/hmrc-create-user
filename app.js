@@ -5,7 +5,6 @@ require('dotenv').config();
 const request = require('superagent');
 const express = require('express');
 const winston = require('winston');
-const dateFormat = require('dateformat');
 
 // Start Client configuration
 const serverToken = process.env.HMRC_SERVER_TOKEN;
@@ -25,9 +24,7 @@ app.set('view engine', 'ejs');
 
 const log = new (winston.Logger)({
   transports: [
-    new (winston.transports.Console)({
-      timestamp: () => dateFormat(Date.now(), "isoDateTime")
-    })
+    new (winston.transports.Console)()
   ]
 });
 

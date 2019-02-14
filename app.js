@@ -26,9 +26,7 @@ app.set('view engine', 'ejs');
 const log = new (winston.Logger)({
   transports: [
     new (winston.transports.Console)({
-      timestamp: () => dateFormat(Date.now(), "isoDateTime"),
-      formatter: (options) => `${options.timestamp()} ${options.level.toUpperCase()} ${options.message ? options.message : ''}
-          ${options.meta && Object.keys(options.meta).length ? JSON.stringify(options.meta) : ''}`
+      timestamp: () => dateFormat(Date.now(), "isoDateTime")
     })
   ]
 });
@@ -44,13 +42,13 @@ app.get('/', (req, res) => {
 app.get("/createTestUser",(req,res) => {
   const type = req.query.type;
 
-  callApi(endpoints[type], res, serverToken, true);
+  callApi(endpoints[type], res, serverToken);
 });
 
 
 // Helper functions
 
-const callApi = (resource, res, bearerToken, createTestUser) => {
+const callApi = (resource, res, bearerToken) => {
   const acceptHeader = 'application/vnd.hmrc.1.0+json';
   const url = apiBaseUrl + resource;
   const req = request
@@ -77,7 +75,7 @@ const callApi = (resource, res, bearerToken, createTestUser) => {
   }
   
   req.end((err, apiResponse) => handleResponse(res, err, apiResponse));
-}
+};
 
 const handleResponse = (res, err, apiResponse) => {
   if (err || !apiResponse.ok) {

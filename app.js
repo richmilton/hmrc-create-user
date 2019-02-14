@@ -12,7 +12,11 @@ const serverToken = process.env.HMRC_SERVER_TOKEN;
 const port = process.env.PORT;
 const apiBaseUrl = process.env.HMRC_BASE_URL;
 
-const createTestUserEndpoint = 'create-test-user/organisations';
+const endpoints = {
+  individual: 'create-test-user/individuals',
+  organisation: 'create-test-user/organisations',
+  agent: 'create-test-user/agents'
+};
 
 const app = express();
 
@@ -32,14 +36,15 @@ const log = new (winston.Logger)({
 // home-page route
 app.get('/', (req, res) => {
   res.render('index', {
-    createTestUserEndpoint: createTestUserEndpoint,
+    endpoints: endpoints,
   });
 });
 
 // Call an application-restricted endpoint
 app.get("/createTestUser",(req,res) => {
+  const type = req.query.type;
 
-  callApi(appRestrictedEndpoint, res, serverToken, true);
+  callApi(endpoints[type], res, serverToken, true);
 });
 
 
@@ -47,7 +52,7 @@ app.get("/createTestUser",(req,res) => {
 
 const callApi = (resource, res, bearerToken, createTestUser) => {
   const acceptHeader = 'application/vnd.hmrc.1.0+json';
-  const url = apiBaseUrl + 'create-test-user/organisations';
+  const url = apiBaseUrl + resource;
   const req = request
       .post(url)
       .accept(acceptHeader)

@@ -29,10 +29,24 @@
             </thead>
             <tbody>
             <tr>
-                <td><%= createTestUserEndpoint %></td>
+                <td><%= endpoints.individual %></td>
                 <td>create test user</td>
                 <td>
-                    <a class="btn btn-primary" href="createTestUser">Try it</a>
+                    <a class="btn btn-primary" href="createTestUser?type=individual">Create</a>
+                </td>
+            </tr>
+            <tr>
+                <td><%= endpoints.organisation %></td>
+                <td>create test user</td>
+                <td>
+                    <a class="btn btn-primary" href="createTestUser?type=organisation">Create</a>
+                </td>
+            </tr>
+            <tr>
+                <td><%= endpoints.agent %></td>
+                <td>create test user</td>
+                <td>
+                    <a class="btn btn-primary" href="createTestUser?type=agent">Create</a>
                 </td>
             </tr>
             </tbody>

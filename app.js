@@ -47,7 +47,6 @@ app.get('/', (req, res) => {
 
 app.get(appCreateUserEndpoint, (req,res) => {
   const type = req.query.type;
-
   callApi(hmrcEndpoints[type], res, serverToken);
 });
 

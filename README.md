@@ -30,4 +30,4 @@ http://localhost:{process.env.PORT}/
 
 ### License
 
-Free to use
+http://www.apache.org/licenses/LICENSE-2.0
